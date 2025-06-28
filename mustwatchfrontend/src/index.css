@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    margin: 0;
+    color: white;
+    background-color: #1a202c;
+    font-family: 'Droid Sans', 'Helvetica Neue';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+/* Custom scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
