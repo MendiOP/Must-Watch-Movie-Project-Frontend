@@ -56,17 +56,19 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Discover Movies</h1>
-          <p className="text-gray-400 mb-6">
+      <div className="container mx-auto px-3 sm:px-4 py-6 md:py-8">
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">
+            Discover Movies
+          </h1>
+          <p className="text-gray-400 text-sm sm:text-base mb-4 md:mb-6">
             Explore our collection of the most popular films
           </p>
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-            <div className="w-full md:w-64">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 md:mb-6">
+            <div className="w-full sm:w-64">
               <SearchBar onSearch={handleSearch} />
             </div>
-            <div className="text-sm text-gray-400">
+            <div className="text-xs sm:text-sm text-gray-400">
               {totalResults} {totalResults === 1 ? "movie" : "movies"} found
             </div>
           </div>
@@ -77,17 +79,21 @@ const HomePage = () => {
             <FiLoader className="animate-spin text-4xl text-red-500" />
           </div>
         ) : error ? (
-          <div className="bg-red-900/30 border border-red-700 rounded-lg p-6 text-center">
+          <div className="bg-red-900/30 border border-red-700 rounded-lg p-4 sm:p-6 text-center">
             <p className="text-red-400">{error}</p>
           </div>
         ) : movies.length === 0 ? (
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold mb-2">No movies found</h2>
-            <p className="text-gray-400">Try adjusting your search query</p>
+          <div className="text-center py-10 sm:py-12">
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">
+              No movies found
+            </h2>
+            <p className="text-gray-400 text-sm sm:text-base">
+              Try adjusting your search query
+            </p>
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5">
               {movies.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} />
               ))}
