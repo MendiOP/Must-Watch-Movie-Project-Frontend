@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_KEY = 'a9722f3506de07ec97447cc9b4027c84';
-const ACCESS_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOTcyMmYzNTA2ZGUwN2VjOTc0NDdjYzliNDAyN2M4NCIsIm5iZiI6MTc1MTA1NzQ4MS4zMjMsInN1YiI6IjY4NWYwNDQ5OTk3MDAxZGQ4NjRkMTkwZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.u4JrPtiN7fjPVwCxpEwZKx_yM-SlR-T5K4vc5DR-ykE';
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const ACCESS_TOKEN = import.meta.env.VITE_TMDB_READ_ACCESS_TOKEN;
 
 const tmdb = axios.create({
   baseURL: 'https://api.themoviedb.org/3',

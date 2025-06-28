@@ -21,8 +21,8 @@ function App() {
           <footer className="bg-gray-900 border-t border-gray-800 py-6">
             <div className="container mx-auto px-4 text-center text-gray-500">
               <p>
-                © {new Date().getFullYear()} MovieDB. All movie data provided by
-                TMDB.
+                © {new Date().getFullYear()} Mendi Watches. All movie data
+                provided by TMDB.
               </p>
               <p className="mt-2 text-sm">
                 This product uses the TMDB API but is not endorsed or certified

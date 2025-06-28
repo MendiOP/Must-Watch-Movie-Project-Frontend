@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import {
   FiArrowLeft,
   FiCalendar,
@@ -21,6 +22,12 @@ const MovieDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showTrailer, setShowTrailer] = useState(false);
+
+  // useEffect(() => {
+  //   if (movie) {
+  //     document.title = `${movie.title} - Movie Details`;
+  //   }
+  // }, [movie]);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -82,6 +89,10 @@ const MovieDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
+      <Helmet>
+        <title>{movie.title} - Movie Details</title>
+      </Helmet>
+
       {/* Backdrop */}
       <div className="relative h-96">
         {movie.backdrop_path ? (
@@ -348,22 +359,24 @@ const MovieDetailPage = () => {
       {/* Trailer Modal */}
       {showTrailer && trailer && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="w-full max-w-4xl">
-            <div className="relative">
+          <div className="w-full max-w-4xl h-[80vh]">
+            {" "}
+            {/* Added height */}
+            <div className="relative w-full h-full">
               <button
                 onClick={() => setShowTrailer(false)}
                 className="absolute -top-10 right-0 text-white hover:text-red-500"
               >
                 <FiX className="text-2xl" />
               </button>
-              <div className="aspect-w-16 aspect-h-9">
+              <div className="w-full h-full">
                 <iframe
                   src={`https://www.youtube.com/embed/${trailer.key}`}
                   title={trailer.name}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="w-full h-full rounded-lg"
-                ></iframe>
+                />
               </div>
             </div>
           </div>
