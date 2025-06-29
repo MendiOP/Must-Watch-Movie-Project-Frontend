@@ -23,12 +23,6 @@ const MovieDetailPage = () => {
   const [error, setError] = useState(null);
   const [showTrailer, setShowTrailer] = useState(false);
 
-  // useEffect(() => {
-  //   if (movie) {
-  //     document.title = `${movie.title} - Movie Details`;
-  //   }
-  // }, [movie]);
-
   useEffect(() => {
     const fetchMovie = async () => {
       try {

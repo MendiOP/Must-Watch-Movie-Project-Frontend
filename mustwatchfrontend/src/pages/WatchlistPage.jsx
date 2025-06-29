@@ -1,10 +1,12 @@
-import { FiBookmark, FiTrash2 } from "react-icons/fi";
+import { useEffect } from "react";
+import { FiBookmark, FiLoader, FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 import { useWatchlist } from "../context/WatchlistContext";
 
 const WatchlistPage = () => {
-  const { watchlist, removeFromWatchlist } = useWatchlist();
+  const { watchlist, loading, removeFromWatchlist, refreshWatchlist } =
+    useWatchlist();
 
   const clearWatchlist = () => {
     if (
@@ -13,6 +15,18 @@ const WatchlistPage = () => {
       watchlist.forEach((movie) => removeFromWatchlist(movie.id));
     }
   };
+
+  useEffect(() => {
+    refreshWatchlist();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        <FiLoader className="animate-spin text-4xl text-red-500" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -55,7 +69,14 @@ const WatchlistPage = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             {watchlist.map((movie) => (
               <div key={movie.id} className="relative group">
-                <MovieCard movie={movie} />
+                <MovieCard
+                  movie={{
+                    ...movie,
+                    poster_path: movie.imgUrl,
+                    release_date: movie.releaseYear.toString(),
+                    vote_average: movie.rating,
+                  }}
+                />
                 <button
                   onClick={() => removeFromWatchlist(movie.id)}
                   className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"

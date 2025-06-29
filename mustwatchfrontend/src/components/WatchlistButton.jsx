@@ -1,21 +1,27 @@
 import { FiBookmark } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { useWatchlist } from "../context/WatchlistContext";
 
 const WatchlistButton = ({ movie }) => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
   const inWatchlist = isInWatchlist(movie.id);
 
-  const toggleWatchlist = () => {
+  const toggleWatchlist = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
     if (inWatchlist) {
-      removeFromWatchlist(movie.id);
+      await removeFromWatchlist(movie.id);
     } else {
-      addToWatchlist({
-        id: movie.id,
-        title: movie.title,
-        poster_path: movie.poster_path,
-        release_date: movie.release_date,
-        vote_average: movie.vote_average,
-      });
+      const success = await addToWatchlist(movie);
+      if (!success) {
+        alert("Failed to add to watchlist. Please try again.");
+      }
     }
   };
 
