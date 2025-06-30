@@ -43,7 +43,7 @@ export const authAPI = {
 
 // Watchlist API
 export const watchlistAPI = {
-  getWatchlist: () => api.get('/movies'), // Better endpoint naming
+  getWatchlist: () => api.get('/movies'),
   addToWatchlist: (movie) => api.post('/movies', movie),
   removeFromWatchlist: (id) => api.delete(`/movies/${id}`),
 };
